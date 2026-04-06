@@ -68,56 +68,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const formStatus = document.getElementById('formStatus');
 
     if (contactForm) {
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const submitBtn = contactForm.querySelector('.submit-btn');
-            const originalBtnText = submitBtn.innerHTML;
-            
-            // Show loading state
-            submitBtn.innerHTML = '<span>Mengirim...</span> <i class="fas fa-spinner fa-spin"></i>';
-            submitBtn.disabled = true;
-
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                message: document.getElementById('message').value
-            };
-
-            try {
-                // Send data to backend (Express Server we will create)
-                const response = await fetch('/api/contact', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formData)
-                });
-
-                if (response.ok) {
-                    formStatus.textContent = 'Pesan Anda berhasil dikirim! Saya akan segera menghubungi Anda.';
-                    formStatus.className = 'form-status success';
-                    contactForm.reset();
-                } else {
-                    throw new Error('Gagal mengirim pesan.');
-                }
-            } catch (error) {
-                console.error(error);
-                // Fallback for UI if backend is not running yet
-                formStatus.textContent = 'Pesan dikirim sementara ke lokal (Server backend belum aktif). Terima kasih!';
-                formStatus.className = 'form-status success';
-                contactForm.reset();
-            } finally {
-                // Reset button
-                submitBtn.innerHTML = originalBtnText;
-                submitBtn.disabled = false;
-                
-                // Clear status after 5 seconds
-                setTimeout(() => {
-                    formStatus.textContent = '';
-                    formStatus.className = 'form-status';
-                }, 5000);
-            }
-        });
+        // FormSubmit POST dilakukan langsung (natively) oleh HTML `<form action>`
+        // sehingga JavaScript tidak perlu meng-intercept proses pengiriman.
+        // Cukup biarkan HTML bekerja.
     }
 
     // Fallback Image handling for profile and ID card

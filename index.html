@@ -202,7 +202,12 @@
             </div>
 
             <div class="contact-form-wrapper">
-                <form id="contactForm" class="contact-form">
+                <form id="contactForm" action="https://formsubmit.co/gilangbayup58@gmail.com" method="POST" class="contact-form">
+                    <!-- Penonaktifan Captcha Formsubmit (opsional) -->
+                    <input type="hidden" name="_captcha" value="false">
+                    <!-- Halaman tujuan setelah sukses -->
+                    <input type="hidden" name="_next" value="http://localhost:3000/">
+                    
                     <div class="form-group">
                         <label for="name">Nama Lengkap</label>
                         <input type="text" id="name" name="name" required placeholder="Masukkan nama Anda">
